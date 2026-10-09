@@ -1,0 +1,567 @@
+/* ═══════════════════════════════════════════
+   RESET & TOKENS
+═══════════════════════════════════════════ */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f2f4fb;
+  --border: #d0d6ea;
+  --border-focus: #1558d6;
+  --border-error: #e52222;
+  --border-ok: #16a34a;
+
+  --txt: #0d1240;
+  --txt2: #6b7090;
+  --txt3: #b0b6d0;
+
+  --blue: #1558d6;
+  --blue-dark: #0c3aad;
+  --blue-info: #ddeaff;
+  --blue-info-txt: #1558d6;
+
+  /* Esas reng */
+  --esas: #1b2a4a;
+
+  /* Logo reng */
+  --purple: rgb(126, 68, 144);
+
+  --green: #16a34a;
+  --green-soft: #dcfce7;
+  --red: #e52222;
+
+  --max-w: 480px;
+  --topbar-h: 56px;
+  --r-input: 13px;
+  --r-pill: 50px;
+  --r-info: 13px;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --t: 0.26s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html[data-dark] {
+  --bg: #090b14;
+  --surface: #111422;
+  --surface-2: #181b2c;
+  --border: rgba(255, 255, 255, 0.15);
+  --border-focus: #4a82ff;
+  --border-ok: #22c55e;
+
+  --txt: #eaecff;
+  --txt2: #7880aa;
+  --txt3: #3a3f5e;
+
+  --blue: #4a82ff;
+  --blue-dark: #2d5ce8;
+  --blue-info: #0f1b3d;
+  --blue-info-txt: #6fa3ff;
+
+  --esas: #eaecff;
+  --green-soft: #0a2518;
+}
+
+html {
+  height: 100%;
+  color-scheme: light dark;
+}
+
+body {
+  min-height: 100dvh;
+  background: var(--bg);
+  /* Figma: SF Pro Display */
+  font-family:
+    "SF Pro Display",
+    "SF Pro",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  color: var(--txt);
+  overflow-x: hidden;
+  transition:
+    background var(--t),
+    color var(--t);
+}
+
+/* ═══════════════════════════════════════════
+   APP SHELL
+═══════════════════════════════════════════ */
+.app {
+  width: 100%;
+  max-width: var(--max-w);
+  min-height: 100dvh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 0 22px;
+}
+
+@media (min-width: 481px) {
+  .app {
+    box-shadow:
+      0 0 0 1px rgba(0, 0, 0, 0.07),
+      0 24px 64px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* ═══════════════════════════════════════════
+   TOP BAR
+═══════════════════════════════════════════ */
+.topbar {
+  height: var(--topbar-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  margin: 0 -22px;
+  padding: 0 14px;
+}
+
+.icon-btn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  color: var(--txt);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background var(--t),
+    color var(--t),
+    transform 0.14s;
+}
+.icon-btn svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 2;
+}
+.icon-btn:hover {
+  background: var(--surface-2);
+}
+.icon-btn:active {
+  transform: scale(0.9);
+}
+
+/* ═══════════════════════════════════════════
+   CONTENT
+═══════════════════════════════════════════ */
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-top: 28px;
+}
+
+/* ── Heading — Figma: SF Pro, Bold, 28px, letter-spacing 5% ── */
+.heading {
+  font-family:
+    "SF Pro",
+    "SF Pro Display",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  font-size: 30px; /* Figma: 28 */
+  font-weight: 700; /* Figma: Bold */
+  letter-spacing: 0.05em; /* Figma: 5% → 0.05em */
+  line-height: normal; /* Figma: Auto */
+  color: var(--esas); /* Figma: Esas reng */
+  text-align: center;
+  margin-bottom: 10px;
+  animation: fadeUp 0.4s var(--ease) both;
+  transition: color var(--t);
+}
+
+.subheading {
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--txt2);
+  line-height: 1.6;
+  text-align: center;
+  margin-bottom: 36px;
+  animation: fadeUp 0.4s var(--ease) both 0.05s;
+  transition: color var(--t);
+}
+
+/* ═══════════════════════════════════════════
+   FIELD
+═══════════════════════════════════════════ */
+.field {
+  margin-bottom: 12px;
+  animation: fadeUp 0.4s var(--ease) both 0.1s;
+}
+.field:nth-child(2) {
+  animation-delay: 0.14s;
+}
+
+.field-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--txt2);
+  display: block;
+  margin-bottom: 7px;
+  padding-left: 2px;
+  letter-spacing: -0.05px;
+  transition: color var(--t);
+}
+
+.input-wrap {
+  position: relative;
+}
+
+.pass-input {
+  width: 100%;
+  height: 52px;
+  padding: 0 48px 0 16px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-input);
+  font-family: inherit;
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--txt);
+  outline: none;
+  letter-spacing: 0.12em;
+  -webkit-appearance: none;
+  appearance: none;
+  transition:
+    border-color 0.2s ease,
+    background var(--t),
+    color var(--t),
+    box-shadow 0.2s ease;
+  caret-color: var(--blue);
+}
+.pass-input::placeholder {
+  color: var(--txt3);
+  letter-spacing: 0.1em;
+  font-size: 18px;
+}
+.pass-input:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3.5px rgba(21, 88, 214, 0.12);
+}
+html[data-dark] .pass-input:focus {
+  box-shadow: 0 0 0 3.5px rgba(74, 130, 255, 0.16);
+}
+.pass-input.is-valid {
+  border-color: var(--border-ok);
+}
+.pass-input.is-invalid {
+  border-color: var(--border-error);
+}
+
+/* Eye button */
+.eye-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--txt3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    color var(--t),
+    background 0.16s;
+}
+.eye-btn svg {
+  width: 19px;
+  height: 19px;
+  stroke-width: 1.8;
+}
+.eye-btn:hover {
+  color: var(--blue);
+  background: rgba(21, 88, 214, 0.07);
+}
+.eye-btn:active {
+  transform: translateY(-50%) scale(0.9);
+}
+
+/* Field hint */
+.field-hint {
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 5px;
+  padding-left: 2px;
+  display: none;
+}
+.field-hint.show-error {
+  display: block;
+  color: var(--red);
+}
+.field-hint.show-ok {
+  display: block;
+  color: var(--green);
+}
+
+/* ═══════════════════════════════════════════
+   INFO BOX
+═══════════════════════════════════════════ */
+.info-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: var(--blue-info);
+  border-radius: var(--r-info);
+  padding: 13px 15px;
+  margin-top: 4px;
+  animation: fadeUp 0.4s var(--ease) both 0.18s;
+  transition: background var(--t);
+}
+
+.info-icon {
+  flex-shrink: 0;
+  margin-top: 1px;
+  color: var(--blue-info-txt);
+  transition: color var(--t);
+}
+.info-icon svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+}
+
+.info-text {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--blue-info-txt);
+  line-height: 1.55;
+  transition: color var(--t);
+}
+
+/* ═══════════════════════════════════════════
+   SPACER + SUBMIT BUTTON
+═══════════════════════════════════════════ */
+.flex-space {
+  flex: 1;
+  min-height: 20px;
+}
+
+.submit-btn {
+  width: 100%;
+  height: 54px;
+  background: var(--esas); /* Figma: Esas reng */
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--r-pill);
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: calc(44px + env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 6px 24px rgba(27, 42, 74, 0.35);
+  animation: fadeUp 0.4s var(--ease) both 0.22s;
+  transition:
+    background 0.2s,
+    transform 0.15s,
+    box-shadow 0.2s,
+    opacity 0.2s;
+}
+.submit-btn:hover {
+  background: #0f1f35;
+  box-shadow: 0 8px 30px rgba(27, 42, 74, 0.45);
+}
+.submit-btn:active {
+  transform: scale(0.98);
+}
+.submit-btn:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+html[data-dark] .submit-btn {
+  box-shadow: 0 6px 24px rgba(74, 130, 255, 0.3);
+}
+
+/* Spinner */
+.btn-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2.5px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  display: none;
+  animation: spin 0.7s linear infinite;
+}
+.submit-btn.loading .btn-text {
+  display: none;
+}
+.submit-btn.loading .btn-spinner {
+  display: block;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ═══════════════════════════════════════════
+   SUCCESS VIEW
+═══════════════════════════════════════════ */
+.success-view {
+  display: none;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 14px;
+  padding: 0 8px;
+}
+.success-view.show {
+  display: flex;
+  animation: fadeUp 0.5s var(--ease) both;
+}
+
+.success-ring {
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
+  background: var(--green-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: popIn 0.5s var(--ease) both 0.1s;
+  position: relative;
+  transition: background var(--t);
+}
+.success-ring::after {
+  content: "";
+  position: absolute;
+  inset: -7px;
+  border-radius: 50%;
+  border: 2px solid rgba(22, 163, 74, 0.2);
+  animation: ringOut 0.8s var(--ease) both 0.3s;
+}
+.success-ring svg {
+  width: 38px;
+  height: 38px;
+  stroke: var(--green);
+  stroke-width: 2.5;
+}
+@keyframes popIn {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes ringOut {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.success-title {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--txt);
+  transition: color var(--t);
+}
+.success-sub {
+  font-size: 15px;
+  color: var(--txt2);
+  line-height: 1.6;
+  max-width: 260px;
+  transition: color var(--t);
+}
+
+.success-cta {
+  width: 100%;
+  max-width: 336px;
+  height: 54px;
+  background: var(--esas); /* Figma: Esas reng */
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--r-pill);
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 700;
+  margin-top: 4px;
+  margin-bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+  letter-spacing: -0.15px;
+  box-shadow: 0 10px 30px rgba(27, 42, 74, 0.28);
+  transition:
+    background 0.2s,
+    transform 0.15s,
+    box-shadow 0.2s;
+}
+.success-cta:hover {
+  background: #0f1f35;
+  box-shadow: 0 12px 36px rgba(27, 42, 74, 0.36);
+}
+.success-cta:active {
+  transform: scale(0.98);
+}
+
+/* ═══════════════════════════════════════════
+   ANIMATIONS
+═══════════════════════════════════════════ */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media (max-width: 360px) {
+  .heading {
+    font-size: 24px;
+  }
+  .pass-input {
+    height: 48px;
+    font-size: 18px;
+  }
+  .submit-btn {
+    font-size: 16px;
+    height: 50px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

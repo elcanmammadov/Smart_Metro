@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="az">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
+    <title>Smart Metro – Şifrəni Unutmusuz?</title>
+
+    <script>
+      (function () {
+        var s = null;
+        try {
+          s = localStorage.getItem("metro-forgot-theme");
+        } catch (e) {}
+        var d =
+          s === "dark"
+            ? true
+            : s === "light"
+              ? false
+              : (function () {
+                  try {
+                    return window.matchMedia("(prefers-color-scheme:dark)")
+                      .matches;
+                  } catch (e) {
+                    return false;
+                  }
+                })();
+        if (d) document.documentElement.setAttribute("data-dark", "");
+      })();
+    </script>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <!-- ── TOP BAR ── -->
+      <header class="topbar">
+        <button class="icon-btn" id="backBtn" aria-label="Geri">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
+        </button>
+
+        <button class="icon-btn" id="themeBtn" aria-label="Qaranlıq moda keç">
+          <svg
+            id="themeIcon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+        </button>
+      </header>
+
+      <!-- ── CONTENT ── -->
+      <main class="content" id="mainContent">
+        <!-- Form view -->
+        <div id="formView">
+          <h1 class="heading">Şifrəni unutmusuz?</h1>
+          <p class="subheading">
+            Yeni şifrə təyin etmək üçün<br />telefon nömrənizi daxil edin.
+          </p>
+
+          <!-- Label -->
+          <label class="field-label" for="phoneInput">Telefon nömrə</label>
+
+          <!-- Input -->
+          <div class="input-wrap">
+            <span class="input-icon" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="5" y="2" width="14" height="20" rx="3" />
+                <line x1="12" y1="18" x2="12.01" y2="18" stroke-width="2.5" />
+              </svg>
+            </span>
+            <input
+              type="tel"
+              id="phoneInput"
+              class="phone-input"
+              placeholder="(+994)"
+              autocomplete="tel"
+              inputmode="tel"
+              maxlength="20"
+              aria-required="true"
+              aria-describedby="errorMsg infoMsg"
+            />
+            <p class="error-msg" id="errorMsg" role="alert">
+              Düzgün telefon nömrəsi daxil edin.
+            </p>
+          </div>
+
+          <!-- Info box -->
+          <div class="info-box" id="infoMsg">
+            <span class="info-icon" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>
+            </span>
+            <p class="info-text">
+              Təsdiqlənmə kodu telefon nömrənizə göndəriləcək.
+            </p>
+          </div>
+
+          <div class="flex-space"></div>
+
+          <!-- Submit -->
+          <button class="submit-btn" id="submitBtn" type="button" disabled>
+            <span class="btn-text">Kodu göndər</span>
+            <span class="btn-spinner" aria-hidden="true"></span>
+          </button>
+        </div>
+        <!-- /formView -->
+
+        <!-- Success view (hidden initially) -->
+        <div class="success-box" id="successView" aria-live="polite">
+          <div class="success-circle">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+          </div>
+          <p class="success-title">Kod göndərildi!</p>
+          <p class="success-sub">
+            Telefon nömrənizə 6 rəqəmli<br />təsdiq kodu göndərildi.
+          </p>
+
+          <div class="flex-space"></div>
+
+          <button class="submit-btn" id="resendBtn" type="button">
+            <span class="btn-text">Yenidən göndər</span>
+            <span class="btn-spinner" aria-hidden="true"></span>
+          </button>
+        </div>
+        <!-- /successView -->
+      </main>
+    </div>
+
+    <script src="../lib/axios.min.js"></script>
+    <script src="../lib/api.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

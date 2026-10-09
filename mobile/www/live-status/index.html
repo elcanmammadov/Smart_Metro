@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+  <title>Smart Metro – Diqqət</title>
+
+  <script>
+    (function(){
+      var s=null;try{s=localStorage.getItem("metro-alert-theme");}catch(e){}
+      var d=(s==="dark")?true:(s==="light")?false:(function(){
+        try{return window.matchMedia("(prefers-color-scheme:dark)").matches;}catch(e){return false;}
+      })();
+      if(d)document.documentElement.setAttribute("data-dark","");
+    })();
+  </script>
+
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div class="app">
+
+  <!-- ── TOP BAR ── -->
+  <header class="topbar">
+    <button class="icon-btn" id="backBtn" aria-label="Geri">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+    </button>
+
+    <h1 class="topbar-title">28 May stansiyası</h1>
+
+    <button class="icon-btn" id="themeBtn" aria-label="Qaranlıq moda keç">
+      <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+    </button>
+  </header>
+
+  <!-- ── PAGE BACKGROUND ── -->
+  <div class="page-bg">
+
+    <!-- Arrival notification bar -->
+    <div class="arrival-bar">
+      <span class="arrival-bar-text">Qatar 2 dəqiqəyə gəlir</span>
+      <div class="arrival-bar-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white"
+             stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="13" rx="3"/>
+          <path d="M3 11h18"/>
+          <path d="M8 17v2M16 17v2"/>
+          <rect x="7" y="7" width="4" height="3" rx="1"/>
+          <rect x="13" y="7" width="4" height="3" rx="1"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Ghost content -->
+    <div class="ghost-content" aria-hidden="true">
+      <div class="ghost-card"></div>
+      <div class="ghost-wagon-row">
+        <div class="ghost-wagon"></div>
+        <div class="ghost-wagon"></div>
+        <div class="ghost-wagon"></div>
+        <div class="ghost-wagon"></div>
+        <div class="ghost-wagon"></div>
+      </div>
+      <div class="ghost-card" style="height:60px"></div>
+    </div>
+
+    <!-- ── OVERLAY + MODAL ── -->
+    <div class="overlay" id="overlay" role="dialog" aria-modal="true"
+         aria-labelledby="alertHeading" aria-describedby="alertBody">
+
+      <div class="alert-card" id="alertCard">
+
+        <div class="alert-icon-wrap" aria-hidden="true">
+         <svg viewBox="0 0 24 24" fill="none" width="48" height="48">
+  <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"
+        fill="#f59e0b" stroke="#f59e0b" stroke-width="0"/>
+  <line x1="12" y1="9" x2="12" y2="13"
+        stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+  <line x1="12" y1="17" x2="12.01" y2="17"
+        stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+</svg>
+        </div>
+
+        <h2 class="alert-heading" id="alertHeading">Diqqət!</h2>
+
+        <p class="alert-body" id="alertBody">
+          5 dəqiqəyə<br/>sıxlıq artacaq
+        </p>
+
+        <p class="alert-sub">
+          Alternativ marşrut seçərək vaxta qənaat edin.
+        </p>
+
+        <button class="alert-btn-primary" id="altRouteBtn" type="button">
+          Alternativ marşrut göstər
+        </button>
+
+        <button class="alert-btn-secondary" id="closeBtn" type="button">
+          Bağla
+        </button>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── BOTTOM NAV ── -->
+  <nav class="bottom-nav" aria-label="Əsas naviqasiya">
+    <button class="nav-item" aria-label="Ana səhifə" data-href="../home/index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/>
+        <polyline points="9 21 9 12 15 12 15 21"/>
+      </svg>
+      <span>Ana səhifə</span>
+    </button>
+
+    <button class="nav-item active" aria-label="Marşrutlar" aria-current="page" data-href="../trip-planner/index.html">
+      <div class="nav-badge" aria-hidden="true"></div>
+      <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+          </svg>
+      <span>Marşrutlar</span>
+    </button>
+
+    <button class="nav-item" aria-label="Bildirişlər" data-href="../alert-warning/index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+      </svg>
+      <span>Bildirişlər</span>
+    </button>
+
+    <button class="nav-item" aria-label="Profil" data-href="../profile/index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+      <span>Profil</span>
+    </button>
+  </nav>
+
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="../lib/axios.min.js"></script>
+<script src="../lib/api.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="az">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
+    <title>Smart Metro – Yeni şifrə</title>
+
+    <script>
+      (function () {
+        var s = null;
+        try {
+          s = localStorage.getItem("metro-newpass-theme");
+        } catch (e) {}
+        var d =
+          s === "dark"
+            ? true
+            : s === "light"
+              ? false
+              : (function () {
+                  try {
+                    return window.matchMedia("(prefers-color-scheme:dark)")
+                      .matches;
+                  } catch (e) {
+                    return false;
+                  }
+                })();
+        if (d) document.documentElement.setAttribute("data-dark", "");
+      })();
+    </script>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <!-- ── TOP BAR ── -->
+      <header class="topbar">
+        <button class="icon-btn" id="backBtn" aria-label="Geri">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
+        </button>
+        <button class="icon-btn" id="themeBtn" aria-label="Qaranlıq moda keç">
+          <svg
+            id="themeIcon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+        </button>
+      </header>
+
+      <!-- ── FORM ── -->
+      <main class="content" id="formView">
+        <!-- Centered heading -->
+        <h1 class="heading">Yeni şifrə</h1>
+        <p class="subheading">Zəhmət olmasa, yeni şifrənizi<br />daxil edin.</p>
+
+        <!-- New password -->
+        <div class="field">
+          <label class="field-label" for="passInput">Yeni şifrə</label>
+          <div class="input-wrap">
+            <input
+              class="pass-input"
+              id="passInput"
+              type="password"
+              placeholder="••••••••••"
+              autocomplete="new-password"
+              aria-required="true"
+              aria-describedby="passHint"
+            />
+            <button
+              class="eye-btn"
+              id="eyeBtn1"
+              type="button"
+              aria-label="Şifrəni göstər"
+              aria-pressed="false"
+            >
+              <!-- Eye icon -->
+              <svg
+                id="eyeIcon1"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+            </button>
+          </div>
+          <p class="field-hint" id="passHint" role="alert"></p>
+        </div>
+
+        <!-- Confirm password -->
+        <div class="field">
+          <label class="field-label" for="confirmInput">Şifrəni təkrarla</label>
+          <div class="input-wrap">
+            <input
+              class="pass-input"
+              id="confirmInput"
+              type="password"
+              placeholder="••••••••••"
+              autocomplete="new-password"
+              aria-required="true"
+              aria-describedby="confirmHint"
+            />
+            <button
+              class="eye-btn"
+              id="eyeBtn2"
+              type="button"
+              aria-label="Şifrəni göstər"
+              aria-pressed="false"
+            >
+              <svg
+                id="eyeIcon2"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+            </button>
+          </div>
+          <p class="field-hint" id="confirmHint" role="alert"></p>
+        </div>
+
+        <!-- Info box -->
+        <div class="info-box">
+          <span class="info-icon" aria-hidden="true">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="8" x2="12" y2="12" />
+              <line x1="12" y1="16" x2="12.01" y2="16" />
+            </svg>
+          </span>
+          <p class="info-text">
+            Şifrəniz ən azı 8 simvol olmalı və rəqəm və hərf daxil edilməlidir.
+          </p>
+        </div>
+
+        <div class="flex-space"></div>
+
+        <!-- Submit button -->
+        <button class="submit-btn" id="submitBtn" type="button" disabled>
+          <span class="btn-text">Yadda saxla</span>
+          <span class="btn-spinner" aria-hidden="true"></span>
+        </button>
+      </main>
+
+      <!-- ── SUCCESS ── -->
+      <div class="success-view" id="successView" aria-live="polite">
+        <div class="success-ring">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+        </div>
+        <p class="success-title">Şifrə yeniləndi!</p>
+        <p class="success-sub">
+          Şifrəniz uğurla yeniləndi.<br />İndi daxil ola bilərsiniz.
+        </p>
+        <div class="flex-space"></div>
+        <button class="success-cta" id="loginBtn" type="button">
+          Daxil ol
+        </button>
+      </div>
+    </div>
+    <script src="../lib/axios.min.js"></script>
+    <script src="../lib/api.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

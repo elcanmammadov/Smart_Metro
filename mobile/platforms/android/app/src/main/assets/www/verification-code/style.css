@@ -1,0 +1,590 @@
+/* ═══════════════════════════════════════════
+   RESET & TOKENS
+═══════════════════════════════════════════ */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f2f4fb;
+  --border: #d0d5e8;
+  --border-focus: #1558d6;
+  --border-filled: #1558d6;
+  --border-error: #e52222;
+
+  --txt: #0d1240;
+  --txt2: #6b7090;
+  --txt3: #a0a6c0;
+
+  --blue: #1558d6;
+  --blue-dark: #0f3f9e;
+  --blue-soft: #e8f0ff;
+
+  /* Esas reng */
+  --esas: #1b2a4a;
+
+  /* Logo reng */
+  --purple: rgb(126, 68, 144);
+
+  --green: #16a34a;
+  --green-soft: #dcfce7;
+  --red: #e52222;
+
+  --max-w: 480px;
+  --topbar-h: 56px;
+  --r: 16px;
+  --r-sm: 12px;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --t: 0.26s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html[data-dark] {
+  --bg: #090b14;
+  --surface: #111422;
+  --surface-2: #181b2c;
+  --border: rgba(255, 255, 255, 0.15);
+  --border-focus: #4a82ff;
+  --border-filled: #4a82ff;
+
+  --txt: #eaecff;
+  --txt2: #7880aa;
+  --txt3: #3f4465;
+
+  --blue: #4a82ff;
+  --blue-dark: #2d5ce8;
+  --blue-soft: #131e40;
+
+  --esas: #eaecff;
+  --green-soft: #0a2518;
+}
+
+html {
+  height: 100%;
+  color-scheme: light dark;
+}
+
+body {
+  min-height: 100dvh;
+  background: var(--bg);
+  /* Figma: SF Pro Display */
+  font-family:
+    "SF Pro Display",
+    "SF Pro",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  color: var(--txt);
+  overflow-x: hidden;
+  transition:
+    background var(--t),
+    color var(--t);
+}
+
+/* ═══════════════════════════════════════════
+   APP SHELL
+═══════════════════════════════════════════ */
+.app {
+  width: 100%;
+  max-width: var(--max-w);
+  min-height: 100dvh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 0 28px;
+}
+
+/* ═══════════════════════════════════════════
+   TOP BAR
+═══════════════════════════════════════════ */
+.topbar {
+  height: var(--topbar-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  margin: 0 -28px;
+  padding: 0 16px;
+}
+
+.icon-btn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  color: var(--txt);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background var(--t),
+    color var(--t),
+    transform 0.14s;
+}
+.icon-btn svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 2;
+}
+.icon-btn:hover {
+  background: var(--surface-2);
+}
+.icon-btn:active {
+  transform: scale(0.9);
+}
+
+/* ═══════════════════════════════════════════
+   MAIN CONTENT
+═══════════════════════════════════════════ */
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-top: 36px;
+}
+
+/* ── Heading — Figma: SF Pro, Bold, 28px, letter-spacing 5% ── */
+.heading {
+  font-family:
+    "SF Pro",
+    "SF Pro Display",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  font-size: 28px; /* Figma: 28 */
+  font-weight: 700; /* Figma: Bold */
+  letter-spacing: 0.05em; /* Figma: 5% → 0.05em */
+  line-height: normal; /* Figma: Auto */
+  color: var(--esas); /* Figma: Esas reng */
+  margin-bottom: 12px;
+  animation: slideUp 0.4s var(--ease) both;
+  transition: color var(--t);
+}
+
+.subheading {
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--txt2);
+  line-height: 1.6;
+  margin-bottom: 44px;
+  max-width: 280px;
+  animation: slideUp 0.4s var(--ease) both 0.05s;
+  transition: color var(--t);
+}
+
+/* ═══════════════════════════════════════════
+   OTP BOXES
+═══════════════════════════════════════════ */
+.otp-row {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  margin-bottom: 32px;
+  animation: slideUp 0.4s var(--ease) both 0.1s;
+}
+
+.otp-box {
+  width: 68px;
+  height: 72px;
+  border: 2px solid var(--border);
+  border-radius: var(--r);
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--esas); /* Figma: Esas reng */
+  cursor: text;
+  position: relative;
+  transition:
+    border-color 0.2s ease,
+    background var(--t),
+    color var(--t),
+    transform 0.15s,
+    box-shadow 0.2s ease;
+  user-select: none;
+}
+.otp-box.focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 4px rgba(21, 88, 214, 0.13);
+}
+html[data-dark] .otp-box.focus {
+  box-shadow: 0 0 0 4px rgba(74, 130, 255, 0.18);
+}
+.otp-box.filled {
+  border-color: var(--border-filled);
+}
+.otp-box.error {
+  border-color: var(--border-error);
+  animation: shake 0.4s var(--ease);
+}
+.otp-box:active {
+  transform: scale(0.95);
+}
+
+.otp-error {
+  min-height: 18px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--red);
+  text-align: center;
+  margin-top: 10px;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.otp-error.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Cursor blink */
+.otp-box.focus.empty::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 32px;
+  background: var(--border-focus);
+  border-radius: 1px;
+  animation: blink 1s ease infinite;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-6px);
+  }
+  40% {
+    transform: translateX(6px);
+  }
+  60% {
+    transform: translateX(-4px);
+  }
+  80% {
+    transform: translateX(4px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Hidden input */
+.otp-hidden-input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+  font-size: 16px;
+}
+
+/* ═══════════════════════════════════════════
+   TIMER & RESEND
+═══════════════════════════════════════════ */
+.timer-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 44px;
+  animation: slideUp 0.4s var(--ease) both 0.15s;
+}
+
+.timer-text {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--blue);
+  letter-spacing: 0.1px;
+  font-variant-numeric: tabular-nums;
+  transition: color var(--t);
+}
+
+.resend-link {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--blue);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 4px 0;
+  opacity: 0.45;
+  pointer-events: none;
+  transition:
+    opacity 0.3s ease,
+    color var(--t);
+}
+.resend-link.active {
+  opacity: 1;
+  pointer-events: all;
+}
+.resend-link:hover {
+  text-decoration: underline;
+}
+.resend-link.active:active {
+  opacity: 0.7;
+}
+
+/* ═══════════════════════════════════════════
+   SUBMIT BUTTON
+═══════════════════════════════════════════ */
+.flex-space {
+  flex: 1;
+  min-height: 16px;
+}
+
+.submit-btn {
+  width: 100%;
+  height: 56px;
+  background: var(--esas); /* Figma: Esas reng */
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 50px;
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: calc(40px + env(safe-area-inset-bottom, 0px));
+  transition:
+    background 0.2s,
+    transform 0.15s,
+    box-shadow 0.2s,
+    opacity 0.2s;
+  box-shadow: 0 8px 28px rgba(27, 42, 74, 0.35);
+  animation: slideUp 0.4s var(--ease) both 0.2s;
+}
+.submit-btn:hover {
+  background: #0f1f35;
+  box-shadow: 0 10px 36px rgba(27, 42, 74, 0.45);
+}
+.submit-btn:active {
+  transform: scale(0.98);
+}
+.submit-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+html[data-dark] .submit-btn {
+  box-shadow: 0 8px 28px rgba(74, 130, 255, 0.28);
+}
+
+/* Spinner */
+.btn-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2.5px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  display: none;
+  animation: spin 0.7s linear infinite;
+}
+.submit-btn.loading .btn-text {
+  display: none;
+}
+.submit-btn.loading .btn-spinner {
+  display: block;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ═══════════════════════════════════════════
+   SUCCESS VIEW
+═══════════════════════════════════════════ */
+.success-view {
+  display: none;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 16px;
+  padding: 0 16px;
+}
+.success-view.show {
+  display: flex;
+  animation: slideUp 0.5s var(--ease) both;
+}
+
+.success-ring {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: var(--green-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: popIn 0.5s var(--ease) both 0.1s;
+  position: relative;
+}
+.success-ring::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid rgba(22, 163, 74, 0.2);
+  animation: ringOut 0.8s var(--ease) both 0.3s;
+}
+@keyframes ringOut {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.success-ring svg {
+  width: 40px;
+  height: 40px;
+  stroke: var(--green);
+  stroke-width: 2.5;
+}
+@keyframes popIn {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.success-title {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--txt);
+  transition: color var(--t);
+}
+.success-sub {
+  font-size: 15px;
+  color: var(--txt2);
+  line-height: 1.6;
+  max-width: 260px;
+  transition: color var(--t);
+}
+
+.success-btn {
+  width: 100%;
+  max-width: 336px;
+  height: 56px;
+  background: var(--esas); /* Figma: Esas reng */
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 50px;
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 700;
+  margin-top: 4px;
+  margin-bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+  letter-spacing: -0.15px;
+  transition:
+    background 0.2s,
+    transform 0.15s,
+    box-shadow 0.2s;
+  box-shadow: 0 10px 30px rgba(27, 42, 74, 0.28);
+}
+.success-btn:hover {
+  background: #0f1f35;
+  box-shadow: 0 12px 36px rgba(27, 42, 74, 0.36);
+}
+.success-btn:active {
+  transform: scale(0.98);
+}
+
+/* ═══════════════════════════════════════════
+   ANIMATIONS
+═══════════════════════════════════════════ */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media (min-width: 481px) {
+  .app {
+    box-shadow:
+      0 0 0 1px rgba(0, 0, 0, 0.07),
+      0 20px 60px rgba(0, 0, 0, 0.1);
+  }
+}
+@media (max-width: 380px) {
+  .otp-box {
+    width: 58px;
+    height: 64px;
+    font-size: 28px;
+  }
+  .otp-row {
+    gap: 10px;
+  }
+  .heading {
+    font-size: 24px;
+  }
+}
+@media (max-width: 320px) {
+  .otp-box {
+    width: 52px;
+    height: 58px;
+    font-size: 24px;
+    border-radius: 12px;
+  }
+  .otp-row {
+    gap: 8px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

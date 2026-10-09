@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="az">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
+    <title>Smart Metro – Bildirişlər</title>
+
+    <script>
+      (function () {
+        var s = null;
+        try {
+          s = localStorage.getItem("metro-notif-theme");
+        } catch (e) {}
+        var d =
+          s === "dark"
+            ? true
+            : s === "light"
+              ? false
+              : (function () {
+                  try {
+                    return window.matchMedia("(prefers-color-scheme:dark)")
+                      .matches;
+                  } catch (e) {
+                    return false;
+                  }
+                })();
+        if (d) document.documentElement.setAttribute("data-dark", "");
+      })();
+    </script>
+
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .notif-loading {
+        display: none;
+        padding: 16px;
+      }
+      .sk-card {
+        height: 76px;
+        background: var(--surface);
+        border-radius: var(--r-sm);
+        margin-bottom: 10px;
+        position: relative;
+        overflow: hidden;
+      }
+      .sk-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        translate: -100% 0;
+        background: linear-gradient(
+          90deg,
+          transparent 0%,
+          var(--surface-2) 50%,
+          transparent 100%
+        );
+        animation: sk-shimmer 1.4s infinite;
+      }
+      @keyframes sk-shimmer {
+        to {
+          translate: 100% 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <!-- ── TOP BAR ── -->
+      <header class="topbar" id="topbar">
+        <button class="icon-btn" id="backBtn" aria-label="Geri">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
+        </button>
+        <h1 class="topbar-title">Bildirişlər</h1>
+        <button class="icon-btn" id="themeBtn" aria-label="Qaranlıq moda keç">
+          <svg
+            id="themeIcon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+        </button>
+      </header>
+
+      <!-- ── SCROLL ── -->
+      <main class="scroll-area" id="scrollArea">
+        <div class="scroll-inner" id="scrollInner">
+          <!-- Filter tabs -->
+          <div class="filter-tabs" role="tablist" id="filterTabs">
+            <button
+              class="tab-btn active"
+              role="tab"
+              data-filter="all"
+              aria-selected="true"
+            >
+              Hamısı
+            </button>
+            <button
+              class="tab-btn"
+              role="tab"
+              data-filter="unread"
+              aria-selected="false"
+            >
+              Oxunmamış <span class="tab-unread-dot" id="unreadDot"></span>
+            </button>
+            <button
+              class="tab-btn"
+              role="tab"
+              data-filter="system"
+              aria-selected="false"
+            >
+              Sistem
+            </button>
+          </div>
+
+          <!-- Loading skeleton -->
+          <div id="notifLoading" class="notif-loading">
+            <div class="sk-card"></div>
+            <div class="sk-card"></div>
+            <div class="sk-card"></div>
+          </div>
+
+          <!-- Dynamic notification sections (rendered by script.js) -->
+          <div id="notifSections"></div>
+
+          <!-- Empty state (hidden by default) -->
+          <div class="empty-state" id="emptyState" aria-live="polite">
+            <div class="empty-icon">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                <line x1="4" y1="4" x2="20" y2="20" />
+              </svg>
+            </div>
+            <p class="empty-title">Bildiriş yoxdur</p>
+            <p class="empty-sub">Bu kateqoriyada heç bir bildiriş tapılmadı.</p>
+          </div>
+
+          <div class="scroll-pad"></div>
+        </div>
+      </main>
+
+      <!-- ── BOTTOM NAV ── -->
+      <nav class="bottom-nav" aria-label="Əsas naviqasiya">
+        <button
+          class="nav-item"
+          aria-label="Ana səhifə"
+          data-href="../home/index.html"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z" />
+            <polyline points="9 21 9 12 15 12 15 21" />
+          </svg>
+          <span>Ana səhifə</span>
+        </button>
+
+        <button
+          class="nav-item"
+          aria-label="Marşrutlar"
+          data-href="../trip-planner/index.html"
+        >
+          <div class="nav-badge" aria-hidden="true"></div>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+          </svg>
+          <span>Marşrutlar</span>
+        </button>
+
+        <button
+          class="nav-item active"
+          aria-label="Bildirişlər"
+          aria-current="page"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+            <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+          </svg>
+          <span>Bildirişlər</span>
+        </button>
+
+        <button
+          class="nav-item"
+          aria-label="Profil"
+          data-href="../profile/index.html"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+          <span>Profil</span>
+        </button>
+      </nav>
+    </div>
+    <!-- ── NOTİFİKASİYA DETAl MODALI ── -->
+    <div class="notif-modal-backdrop" id="modalBackdrop" aria-hidden="true"></div>
+    <div class="notif-modal" id="notifModal" role="dialog" aria-modal="true"
+         aria-labelledby="modalTitle" tabindex="-1">
+      <div class="modal-drag-handle"></div>
+
+      <div class="modal-icon-large" id="modalIconWrap"></div>
+
+      <h2 class="modal-title" id="modalTitle"></h2>
+      <p class="modal-desc" id="modalBodyFull"></p>
+
+      <div class="modal-actions">
+        <button class="modal-action-btn" id="modalActionBtn" aria-label="Ətraflı bax"></button>
+        <button class="modal-close-text" id="modalClose" aria-label="Bağla">Bağla</button>
+      </div>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="../lib/axios.min.js"></script>
+    <script src="../lib/api.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,494 @@
+/* ═══════════════════════════════════════════
+   RESET & TOKENS
+═══════════════════════════════════════════ */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f2f4fb;
+  --border: rgba(0, 0, 0, 0.12);
+  --border-focus: #1558d6;
+
+  --txt: #0d1240;
+  --txt2: #6b7090;
+  --txt3: #a0a6c0;
+
+  --blue: #1558d6;
+  --blue-dark: #0f3f9e;
+  --blue-soft: #e8f0ff;
+  --blue-info: #ddeaff;
+  --blue-info-txt: #1558d6;
+
+  /* Esas reng */
+  --esas: #1b2a4a;
+
+  /* Logo reng */
+  --purple: rgb(126, 68, 144);
+
+  --max-w: 480px;
+  --topbar-h: 56px;
+  --r: 16px;
+  --r-sm: 12px;
+  --r-input: 14px;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --t: 0.26s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html[data-dark] {
+  --bg: #090b14;
+  --surface: #111422;
+  --surface-2: #181b2c;
+  --border: rgba(255, 255, 255, 0.12);
+  --border-focus: #4a82ff;
+
+  --txt: #eaecff;
+  --txt2: #7880aa;
+  --txt3: #3f4465;
+
+  --blue: #4a82ff;
+  --blue-dark: #2d5ce8;
+  --blue-soft: #131e40;
+  --blue-info: #111e3e;
+  --blue-info-txt: #6fa3ff;
+
+  --esas: #eaecff;
+}
+
+html {
+  height: 100%;
+  color-scheme: light dark;
+}
+
+body {
+  min-height: 100dvh;
+  background: var(--bg);
+  /* Figma: SF Pro Display */
+  font-family:
+    "SF Pro Display",
+    "SF Pro",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  color: var(--txt);
+  overflow-x: hidden;
+  transition:
+    background var(--t),
+    color var(--t);
+}
+
+/* ═══════════════════════════════════════════
+   APP SHELL
+═══════════════════════════════════════════ */
+.app {
+  width: 100%;
+  max-width: var(--max-w);
+  min-height: 100dvh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 0 24px;
+  position: relative;
+}
+
+/* ═══════════════════════════════════════════
+   TOP BAR
+═══════════════════════════════════════════ */
+.topbar {
+  height: var(--topbar-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  margin: 0 -24px;
+  padding: 0 16px;
+}
+
+.icon-btn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  color: var(--txt);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition:
+    background var(--t),
+    color var(--t),
+    transform 0.14s;
+}
+.icon-btn svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 2;
+}
+.icon-btn:hover {
+  background: var(--surface-2);
+}
+.icon-btn:active {
+  transform: scale(0.9);
+}
+
+/* ═══════════════════════════════════════════
+   MAIN CONTENT
+═══════════════════════════════════════════ */
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-top: 32px;
+}
+
+/* ── Heading — Figma: SF Pro, Bold, 26px, letter-spacing 5% ── */
+.heading {
+  font-family:
+    "SF Pro",
+    "SF Pro Display",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  font-size: 26px; /* Figma: 26 */
+  font-weight: 700; /* Figma: Bold */
+  letter-spacing: 0.05em; /* Figma: 5% → 0.05em */
+  line-height: normal; /* Figma: Auto */
+  color: var(--esas); /* Figma: Esas reng */
+  /* margin-bottom: 14px; */
+  margin-top: 20px;
+  animation: slideUp 0.42s var(--ease) both;
+  transition: color var(--t);
+  text-align: center;
+}
+
+/* ── Subheading ── */
+.subheading {
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--txt2);
+  line-height: 1.6;
+  margin-bottom: 40px;
+  animation: slideUp 0.42s var(--ease) both 0.05s;
+  transition: color var(--t);
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* ── Field label ── */
+.field-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--txt2);
+  letter-spacing: 0.1px;
+  margin-bottom: 8px;
+  transition: color var(--t);
+  animation: slideUp 0.42s var(--ease) both 0.1s;
+}
+
+/* ── Phone input wrapper ── */
+.input-wrap {
+  position: relative;
+  margin-bottom: 16px;
+  animation: slideUp 0.42s var(--ease) both 0.13s;
+}
+
+.input-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--txt3);
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  transition: color var(--t);
+}
+.input-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 1.8;
+  margin-top: 10px;
+}
+
+.phone-input {
+  width: 100%;
+  height: 54px;
+  padding: 0 18px 0 46px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-input);
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--txt);
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    background var(--t),
+    color var(--t),
+    box-shadow 0.2s ease;
+  -webkit-appearance: none;
+  appearance: none;
+  margin-top: 10px;
+}
+.phone-input::placeholder {
+  color: var(--txt3);
+  font-weight: 400;
+}
+.phone-input:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 4px rgba(21, 88, 214, 0.12);
+}
+html[data-dark] .phone-input:focus {
+  box-shadow: 0 0 0 4px rgba(74, 130, 255, 0.15);
+}
+.phone-input:not(:placeholder-shown):not(:focus) {
+  border-color: var(--border-focus);
+}
+
+/* ── Error message ── */
+.error-msg {
+  font-size: 12px;
+  font-weight: 500;
+  color: #e52222;
+  margin-top: 6px;
+  padding-left: 2px;
+  display: none;
+  animation: slideUp 0.3s var(--ease) both;
+}
+.error-msg.show {
+  display: block;
+}
+
+/* ── Info box ── */
+.info-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: var(--blue-info);
+  color: rgb(0, 24, 97);
+  border-radius: var(--r-sm);
+  padding: 14px 16px;
+  margin-top: 30px;
+  animation: slideUp 0.42s var(--ease) both 0.18s;
+  transition: background var(--t);
+}
+
+.info-icon {
+  flex-shrink: 0;
+  margin-top: 1px;
+  color: var(--blue-info-txt);
+  transition: color var(--t);
+}
+.info-icon svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+}
+
+.info-text {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--blue-info-txt);
+  line-height: 1.55;
+  transition: color var(--t);
+}
+
+/* ── Spacer ── */
+.flex-space {
+  flex: 1;
+}
+
+/* ── Submit button ── */
+.submit-btn {
+  width: 100%;
+  height: 56px;
+  background-color: #001861;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 50px;
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 700;
+  margin-top: 80px;
+  letter-spacing: -0.2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: calc(32px + env(safe-area-inset-bottom, 0px));
+  transition:
+    background 0.2s,
+    transform 0.15s,
+    box-shadow 0.2s,
+    opacity 0.2s;
+  box-shadow: 0 8px 28px rgba(21, 88, 214, 0.35);
+  animation: slideUp 0.42s var(--ease) both 0.22s;
+  position: relative;
+  overflow: hidden;
+}
+.submit-btn:hover {
+  background: var(--blue-dark);
+  box-shadow: 0 10px 36px rgba(21, 88, 214, 0.45);
+}
+.submit-btn:active {
+  transform: scale(0.98);
+}
+.submit-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+html[data-dark] .submit-btn {
+  box-shadow: 0 8px 28px rgba(74, 130, 255, 0.3);
+}
+
+/* Loading spinner */
+.btn-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2.5px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  display: none;
+  animation: spin 0.7s linear infinite;
+}
+.submit-btn.loading .btn-text {
+  display: none;
+}
+.submit-btn.loading .btn-spinner {
+  display: block;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Success state ── */
+.success-box {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+  padding: 32px 0;
+  animation: slideUp 0.5s var(--ease) both;
+}
+.success-box.show {
+  display: flex;
+}
+
+.success-circle {
+  width: 72px;
+  height: 72px;
+  background: #dcfce7;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: popIn 0.5s var(--ease) both;
+}
+html[data-dark] .success-circle {
+  background: #0a2518;
+}
+.success-circle svg {
+  width: 32px;
+  height: 32px;
+  stroke: #16a34a;
+  stroke-width: 2.5;
+}
+
+@keyframes popIn {
+  from {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.success-title {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  color: var(--txt);
+  transition: color var(--t);
+}
+.success-sub {
+  font-size: 14px;
+  color: var(--txt2);
+  line-height: 1.55;
+  transition: color var(--t);
+}
+
+.success-box .submit-btn {
+  max-width: 336px;
+  height: 54px;
+  margin-top: 4px;
+  margin-bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+  letter-spacing: -0.15px;
+  box-shadow: 0 10px 30px rgba(21, 88, 214, 0.28);
+}
+
+.success-box .submit-btn:hover {
+  box-shadow: 0 12px 36px rgba(21, 88, 214, 0.36);
+}
+
+/* ═══════════════════════════════════════════
+   ANIMATIONS
+═══════════════════════════════════════════ */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media (min-width: 481px) {
+  .app {
+    box-shadow:
+      0 0 0 1px rgba(0, 0, 0, 0.07),
+      0 20px 60px rgba(0, 0, 0, 0.1);
+  }
+}
+@media (max-width: 360px) {
+  .heading {
+    font-size: 22px;
+  }
+  .submit-btn {
+    font-size: 16px;
+    height: 52px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

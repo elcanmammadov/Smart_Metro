@@ -1,0 +1,495 @@
+{
+  "info": {
+    "_postman_id": "3d181d40-1de2-473b-88f9-3df894d44416",
+    "name": "SmartMetro",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "20543739",
+    "_collection_link": "https://go.postman.co/collection/20543739-3d181d40-1de2-473b-88f9-3df894d44416?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Test",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/test.php",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "test.php"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Register",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"full_name\": \"Avaz Aliyev\",\n  \"phone\": \"+994503232296\",\n  \"password\": \"Salam12345\",\n  \"terms_accepted\": true,\n  \"device_name\": \"iPhone 15\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/register.php",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "register.php"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "",
+            "value": "",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"phone\": \"+994103967154\",\r\n  \"password\": \"Salam12345Salam\",\r\n  \"device_name\": \"iPhone 15\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/login.php",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "login.php"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ForgetPassword",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"action\": \"request_code\",\r\n  \"phone\": \"+9948501234567\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/forgot_password.php",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "forgot_password.php"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "OTP",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"phone\": \"+994103967154\",\r\n  \"otp\": \"9118\",\r\n  \"device_name\": \"iPhone 15\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/OTP.php",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "OTP.php"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ResetPassword",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"token\": \"2a8ffb15784bc8b963dcac163b35ee455268a78783a1de3806545e78ab269246\",\r\n  \"new_password\": \"Salam12345\",\r\n  \"confirm_password\": \"Salam12345\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/reset_password.php",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "reset_password.php"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Notification",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "50f663c145e735a71f7c2222e491f3204d7587714b6b492869377401a78b480e",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"action\": \"list\",\r\n  \"token\": \"c7e75c1bd9326f09946d4a26f29871604a4404ae18aee41303efd9b12f403b50\",\r\n  \"tab\": \"all\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/notifications.php",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "notifications.php"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Home",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"token\": \"4d178985c397d100d84aeeff7852ec041be063sfe64b91556c65b8d87d4bba8b3\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/home.php",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "home.php"
+          ]
+        },
+        "description": "route ile eyni sekildir amma sadece melumat gosterir\n\n<img src=\"https://content.pstmn.io/0e50f2a8-fcf8-4b39-b444-4e3b50c41947/aW1hZ2UucG5n\" alt=\"\" height=\"697\" width=\"328\">"
+      },
+      "response": []
+    },
+    {
+      "name": "Route",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"token\": \"4d178985c397d100d84aeeff7852ec041be063fe64b91556c65b8d87d4bba8b3\",\r\n  \"from_station_id\": 1,\r\n  \"to_station_id\": 27,\r\n  \"route_type\": \"alternative\",\r\n  \"avoid_station_id\": 3\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/route.php",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "route.php"
+          ]
+        },
+        "description": "en optimal marsrut\n\n<img src=\"https://content.pstmn.io/b8e48345-79f4-4a24-bc32-3d059544c3fb/aW1hZ2UucG5n\" alt=\"\" height=\"697\" width=\"328\">"
+      },
+      "response": []
+    },
+    {
+      "name": "Live_tracking",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"token\": \"71e2685d330db23e6a9d252ac1a97ae47aba52dceecccebdad41e493d6aa458c\",\r\n  \"station_id\": 3\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/live_tracking.php",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "live_tracking.php"
+          ]
+        },
+        "description": "Canlı izləmə ekranı, qatar vaxtı, vaqon doluluğu, popup xəbərdarlıq  \n\n<img src=\"https://content.pstmn.io/3162998b-bacb-439c-85b4-aeff09cabbcc/aW1hZ2UucG5n\" alt=\"\" height=\"690\" width=\"326\"><img src=\"https://content.pstmn.io/4412683f-7fdb-447c-b23b-8bf75b608906/aW1hZ2UucG5n\" alt=\"\" height=\"431\" width=\"206\">"
+      },
+      "response": []
+    },
+    {
+      "name": "Stations",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"action\": \"list\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/stations.php",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "stations.php"
+          ]
+        },
+        "description": "Stansiyalar cedveli"
+      },
+      "response": []
+    },
+    {
+      "name": "Stations Search",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"action\": \"search\",\r\n  \"query\": \"Gən\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/stations.php",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "stations.php"
+          ]
+        },
+        "description": "stansiya axtarmaq ucun"
+      },
+      "response": []
+    },
+    {
+      "name": "Guidance",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"token\": \"cbd0da1657bb97748db6aef993140b3c7b8b186165d052b1b42dc64c4471aa55\",\r\n  \"station_id\": 3,\r\n  \"wagon_number\": 2\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/guidance.php",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "guidance.php"
+          ]
+        },
+        "description": "yonlendirme ekrani\n\n<img src=\"https://content.pstmn.io/6e726efa-302f-4ff0-957d-788d1961236c/aW1hZ2UucG5n\" alt=\"\" height=\"682\" width=\"313\">"
+      },
+      "response": []
+    },
+    {
+      "name": "Trip",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"action\": \"start_trip\",\r\n  \"token\": \"ce7485a0892040b84e0bb205f7f869ac0e75575231df0911abd878c10338c0ab\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/trip.php",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "trip.php"
+          ]
+        },
+        "description": "yonlendirme ve live_tracking\n\n<img src=\"https://content.pstmn.io/6bd4436f-05e2-4378-bd80-552a28487900/aW1hZ2UucG5n\" alt=\"\" height=\"695\" width=\"744\">"
+      },
+      "response": []
+    },
+    {
+      "name": "Profile",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"action\": \"get_profile\",\r\n  \"token\": \"cbd0da1657bb97748db6aef993140b3c7b8b186165d052b1b42dc64c4471aa55\"\r\n}\r\n\r\n\r\n// 'get_profile',\r\n// 'update_profile',\r\n// 'update_settings',\r\n// 'set_favorite_station',\r\n// 'list_favorite_routes',\r\n// 'add_favorite_route',\r\n// 'remove_favorite_route',\r\n// 'list_payment_methods',\r\n// 'list_trip_history',\r\n// 'delete_account'",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/profile.php",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "profile.php"
+          ]
+        },
+        "description": "istifadeci melumatlari"
+      },
+      "response": []
+    },
+    {
+      "name": "Statistics",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"action\": \"select\",\r\n  \"api_key\": \"salam123\",\r\n  \"train_number\": \"T-001\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/train_wagon_counts.php",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "train_wagon_counts.php"
+          ]
+        },
+        "description": "qatar nomresi, vaqon nomresi, vaqon kapasitesi, vaqonun hazirki dolulugu, bos yer, dolu yerin faizle gosterisi"
+      },
+      "response": []
+    },
+    {
+      "name": "Statistics İnsert",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"action\": \"insert\",\r\n  \"api_key\": \"salam123\",\r\n  \"train_number\": \"T-001\",\r\n  \"wagon_number\": 2,\r\n  \"wagon_capacity\": 120,\r\n  \"current_people_count\": 85\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/train_wagon_counts.php",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "train_wagon_counts.php"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": ""
+    }
+  ]
+}

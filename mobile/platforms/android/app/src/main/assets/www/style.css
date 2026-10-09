@@ -1,0 +1,190 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(160deg, #f0eeff 0%, #fafaff 100%);
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+}
+
+.screen {
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+@media (min-width: 480px) {
+  .screen {
+    width: 390px;
+    height: 744px;
+    box-shadow: 0 8px 48px rgba(80, 60, 180, 0.13);
+  }
+}
+
+.logo-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: clamp(26px, 4dvh, 60px);
+  margin-bottom: clamp(10px, 2dvh, 20px);
+}
+
+.logo-icon {
+  height: 78px;
+  width: 104px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-icon img,
+.logo-icon svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.logo-text {
+  color: rgb(126, 68, 144); /* Fill: Logo reng */
+  font-family: "SF Pro", sans-serif; /* Font: SF Pro */
+  font-size: 20px; /* Size: 20 */
+  font-weight: 700; /* Weight: Bold */
+  line-height: normal; /* Line height: Auto */
+  letter-spacing: 0%; /* Letter spacing: 0% */
+  height: 24px; /* H: 24 */
+  width: 393px; /* W: 393 */
+  display: block;
+  text-align: center;
+}
+
+.title-area {
+  text-align: center;
+  padding: 0 clamp(24px, 7vw, 36px);
+  margin-bottom: clamp(12px, 2.5dvh, 24px);
+}
+
+.title-area h1 {
+  font-family:
+    "SF Pro",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  font-size: 26px; /* Size: 26 */
+  font-weight: 600; /* Weight: Semibold */
+  color: #1a1035; /* Fill: Esas reng (korundu) */
+  line-height: normal; /* Line height: Auto */
+  letter-spacing: 0%; /* Letter spacing: 0% */
+  height: 31px; /* H: 31 */
+  width: 393px; /* W: 393 */
+  margin-bottom: 8px;
+}
+
+.title-area p {
+  font-family:
+    "SF Pro",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  font-size: 16px; /* Size: 16 */
+  font-weight: 500; /* Weight: Medium */
+  color: #8a82a8; /* Fill: Boz (korundu) */
+  line-height: normal; /* Line height: Auto */
+  letter-spacing: 0; /* Letter spacing: 0% */
+  height: 19px; /* H: 19 */
+  width: 393px; /* W: 393 */
+}
+
+.train-area {
+  width: 90%;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  display: block;
+  margin-right: 20px;
+}
+
+.train-area img,
+.train-area svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+  filter: drop-shadow(
+    0px 0px 10px rgba(0, 0, 0, 0.45)
+  ); /* Effects: Drop shadow */
+  margin-left: 10px;
+}
+
+.bottom-area {
+  width: 100%;
+  padding: clamp(16px, 3dvh, 28px) clamp(20px, 6vw, 32px)
+    clamp(28px, 5dvh, 44px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(14px, 2.5dvh, 22px);
+  background: #fff;
+}
+
+.dots {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.dot {
+  width: 10px; /* W: 10 */
+  height: 10px; /* H: 10 */
+  border-radius: 50%; /* Ellipse → tam yuvarlak */
+  background: #8a82a8; /* Fill: Boz (korundu) */
+  transition: all 0.3s ease;
+}
+.dot.active {
+  width: 38px; /* W: 38 */
+  height: 10px; /* H: 10 */
+  border-radius: 6px; /* Corner radius: 6 */
+  background: rgb(126, 68, 144); /* Fill: Logo reng */
+  overflow: hidden; /* Clip content: ✓ */
+}
+.btn-next {
+  width: 361px; /* W: 361 */
+  height: 48px; /* H: 48 */
+  background: #1b2a4a; /* Fill: Esas reng (korundu) */
+  color: #fff;
+  border: none;
+  border-radius: 10px; /* Corner radius: 10 */
+  font-size: clamp(15px, 4vw, 17px);
+  font-weight: 600;
+  font-family:
+    "SF Pro",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  cursor: pointer;
+  overflow: hidden; /* Clip content: ✓ */
+  transition:
+    transform 0.15s ease,
+    opacity 0.15s ease;
+  box-shadow: 0 4px 20px rgba(27, 42, 74, 0.28);
+}
+
+.btn-next:hover {
+  opacity: 0.88;
+}
+.btn-next:active {
+  transform: scale(0.97);
+}

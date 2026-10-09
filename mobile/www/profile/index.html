@@ -1,0 +1,717 @@
+<!doctype html>
+<html lang="az">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
+    <title>Smart Metro – Profil</title>
+
+    <script>
+      (function () {
+        var s = null;
+        try {
+          s = localStorage.getItem("metro-profile-theme");
+        } catch (e) {}
+        var d =
+          s === "dark"
+            ? true
+            : s === "light"
+              ? false
+              : (function () {
+                  try {
+                    return window.matchMedia("(prefers-color-scheme:dark)")
+                      .matches;
+                  } catch (e) {
+                    return false;
+                  }
+                })();
+        if (d) document.documentElement.setAttribute("data-dark", "");
+      })();
+    </script>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <!-- ── TOP BAR ── -->
+      <header class="topbar" id="topbar">
+        <button class="icon-btn" id="backBtn" aria-label="Geri">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
+        </button>
+        <h1 class="topbar-title">Profil</h1>
+        <button class="icon-btn" id="themeBtn" aria-label="Qaranlıq moda keç">
+          <svg
+            id="themeIcon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+        </button>
+      </header>
+
+      <!-- ── SCROLL ── -->
+      <main class="scroll-area" id="scrollArea">
+        <div class="scroll-inner">
+          <!-- ── USER HEADER ── -->
+          <div class="user-header">
+            <div
+              class="avatar"
+              id="avatarEl"
+              aria-label="Profil"
+            >
+              <span id="avatarInitials">–</span>
+              <div
+                class="avatar-edit"
+                id="avatarEdit"
+                aria-label="Şəkli dəyiş"
+                role="button"
+                tabindex="0"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"
+                  />
+                  <path
+                    d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div class="user-info">
+              <p class="user-name" id="userName">–</p>
+              <div class="user-phone">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="var(--txt3)"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.35 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+                <span id="userPhone">–</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── QUICK CARDS ── -->
+          <div class="quick-row">
+            <!-- Seçilmiş stansiya -->
+            <div
+              class="quick-card"
+              role="button"
+              tabindex="0"
+              aria-label="Seçilmiş stansiya"
+              data-action="station"
+            >
+              <div class="quick-card-top">
+                <div class="quick-icon">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="var(--blue)"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                    />
+                  </svg>
+                </div>
+                <div class="quick-chevron">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="9 18 15 12 9 6" />
+                  </svg>
+                </div>
+              </div>
+              <p class="quick-label">Seçilmiş stansiya</p>
+              <p class="quick-value" id="favoriteStationValue">Seçilməyib</p>
+            </div>
+
+            <!-- Bildirişlər -->
+            <div
+              class="quick-card"
+              role="button"
+              tabindex="0"
+              aria-label="Bildirişlər"
+              data-action="notifications"
+            >
+              <div class="quick-card-top">
+                <div class="quick-icon">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="var(--blue)"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                  </svg>
+                </div>
+                <div class="quick-chevron">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="9 18 15 12 9 6" />
+                  </svg>
+                </div>
+              </div>
+              <p class="quick-label">Bildirişlər</p>
+              <p class="quick-value" style="color: var(--green)">Aktiv</p>
+            </div>
+          </div>
+
+          <!-- ── BU GÜN ── -->
+          <p class="section-label">Bu gün</p>
+          <div class="menu-group">
+            <!-- Şəxsi məlumatlarım -->
+            <button
+              class="menu-item"
+              data-action="personal"
+              aria-label="Şəxsi məlumatlarım"
+            >
+              <div class="menu-icon mi-blue">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+              </div>
+              <div class="menu-text">
+                <p class="menu-title">Şəxsi məlumatlarım</p>
+              </div>
+              <span class="menu-chevron">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </span>
+            </button>
+
+            <!-- Ödəniş metodlarım -->
+            <button
+              class="menu-item"
+              data-action="payment"
+              aria-label="Ödəniş metodlarım"
+            >
+              <div class="menu-icon mi-blue">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="1" y="4" width="22" height="16" rx="3" />
+                  <line x1="1" y1="10" x2="23" y2="10" />
+                </svg>
+              </div>
+              <div class="menu-text">
+                <p class="menu-title">Ödəniş metodlarım</p>
+              </div>
+              <span class="menu-chevron">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </span>
+            </button>
+
+            <!-- Səfər tarixçəm -->
+            <button
+              class="menu-item"
+              data-action="history"
+              aria-label="Səfər tarixçəm"
+            >
+              <div class="menu-icon mi-blue">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 6 12 12 16 14" />
+                </svg>
+              </div>
+              <div class="menu-text">
+                <p class="menu-title">Səfər tarixçəm</p>
+              </div>
+              <span class="menu-chevron">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </span>
+            </button>
+
+            <!-- Seçilmiş marşrutlarım -->
+            <button
+              class="menu-item"
+              data-action="routes"
+              aria-label="Seçilmiş marşrutlarım"
+            >
+              <div class="menu-icon mi-red" style="position: relative">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 8 8 12 12 16" />
+                  <line x1="16" y1="12" x2="8" y2="12" />
+                </svg>
+                <!-- Red dot badge on icon -->
+                <span
+                  style="
+                    position: absolute;
+                    top: -3px;
+                    right: -3px;
+                    width: 9px;
+                    height: 9px;
+                    background: var(--red);
+                    border-radius: 50%;
+                    border: 1.5px solid var(--surface);
+                  "
+                ></span>
+              </div>
+              <div class="menu-text">
+                <p class="menu-title">Seçilmiş marşrutlarım</p>
+              </div>
+              <span class="menu-chevron">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </span>
+            </button>
+          </div>
+          <!-- /menu-group -->
+
+          <!-- ── TƏNZİMLƏMƏLƏR ── -->
+          <p class="section-label">Tənzimləmələr</p>
+          <div class="menu-group">
+            <!-- Dil -->
+            <button class="menu-item" data-action="language" aria-label="Dil">
+              <div class="menu-icon mi-blue">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="2" y1="12" x2="22" y2="12" />
+                  <path
+                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                  />
+                </svg>
+              </div>
+              <div class="menu-text">
+                <p class="menu-title">Dil</p>
+                <p class="menu-sub">Azərbaycan dili</p>
+              </div>
+              <span class="menu-chevron">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </span>
+            </button>
+
+            <!-- Təhlükəsizlik -->
+            <button
+              class="menu-item"
+              data-action="security"
+              aria-label="Təhlükəsizlik"
+            >
+              <div class="menu-icon mi-amber">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="3" y="11" width="18" height="11" rx="2" />
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                </svg>
+              </div>
+              <div class="menu-text">
+                <p class="menu-title">Təhlükəsizlik</p>
+              </div>
+              <span class="menu-chevron">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </span>
+            </button>
+
+            <!-- Ölçatanlıq -->
+            <button
+              class="menu-item"
+              data-action="accessibility"
+              aria-label="Ölçatanlıq"
+            >
+              <div class="menu-icon mi-green">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="4" r="1.5" />
+                  <path d="M6 8l6 2 6-2" />
+                  <path d="M12 10v5" />
+                  <path d="M9 21l3-6 3 6" />
+                </svg>
+              </div>
+              <div class="menu-text">
+                <p class="menu-title">Ölçatanlıq</p>
+              </div>
+              <span class="menu-chevron">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </span>
+            </button>
+
+            <!-- Görünüş -->
+            <button
+              class="menu-item"
+              data-action="appearance"
+              aria-label="Görünüş"
+            >
+              <div class="menu-icon mi-purple">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                </svg>
+              </div>
+              <div class="menu-text">
+                <p class="menu-title">Görünüş</p>
+                <p class="menu-sub" id="themeSubLabel">İşıqlı</p>
+              </div>
+              <span class="menu-chevron">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </span>
+            </button>
+
+            <!-- Bildiriş tənzimləmələri -->
+            <button
+              class="menu-item"
+              data-action="notif-settings"
+              aria-label="Bildiriş tənzimləmələri"
+            >
+              <div class="menu-icon mi-blue">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                  <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                  <line x1="4" y1="4" x2="20" y2="20" stroke-dasharray="2 2" />
+                </svg>
+              </div>
+              <div class="menu-text">
+                <p class="menu-title">Bildiriş tənzimləmələri</p>
+              </div>
+              <span class="menu-chevron">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </span>
+            </button>
+
+            <!-- Dəstək -->
+            <button class="menu-item" data-action="support" aria-label="Dəstək">
+              <div class="menu-icon mi-gray">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
+                  <path
+                    d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z"
+                  />
+                  <path
+                    d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"
+                  />
+                </svg>
+              </div>
+              <div class="menu-text">
+                <p class="menu-title">Dəstək</p>
+              </div>
+              <span class="menu-chevron">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </span>
+            </button>
+          </div>
+          <!-- /menu-group -->
+
+          <!-- ── LOGOUT BUTTON ── -->
+          <button class="logout-btn" id="logoutBtn" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+              <polyline points="16 17 21 12 16 7"/>
+              <line x1="21" y1="12" x2="9" y2="12"/>
+            </svg>
+            Çıxış
+          </button>
+
+          <!-- ── DELETE BUTTON ── -->
+          <button class="delete-btn" id="deleteBtn" type="button">
+            Hesabı sil
+          </button>
+
+          <div class="scroll-pad"></div>
+        </div>
+      </main>
+
+      <!-- ── BOTTOM NAV ── -->
+      <nav class="bottom-nav" aria-label="Əsas naviqasiya">
+        <button class="nav-item" aria-label="Ana səhifə" data-href="../home/index.html">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z" />
+            <polyline points="9 21 9 12 15 12 15 21" />
+          </svg>
+          <span>Ana səhifə</span>
+        </button>
+
+        <button class="nav-item" aria-label="Marşrutlar" data-href="../trip-planner/index.html">
+          <div class="nav-badge" aria-hidden="true"></div>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+          </svg>
+          <span>Marşrutlar</span>
+        </button>
+
+        <button class="nav-item" aria-label="Bildirişlər" data-href="../alert-warning/index.html">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+            <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+          </svg>
+          <span>Bildirişlər</span>
+        </button>
+
+        <button class="nav-item active" aria-label="Profil" aria-current="page">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+          <span>Profil</span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- ── STATION PICKER ── -->
+    <div class="picker-overlay" id="stationPickerOverlay" role="dialog" aria-modal="true" aria-labelledby="pickerTitle">
+      <div class="picker-sheet" id="pickerSheet">
+        <div class="picker-handle"></div>
+        <div class="picker-header">
+          <h2 class="picker-title" id="pickerTitle">Stansiya seçin</h2>
+          <button class="picker-close-btn" id="pickerClose" type="button" aria-label="Bağla">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+              <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+        </div>
+        <div class="picker-search-wrap">
+          <svg class="picker-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input type="search" class="picker-search" id="stationSearch" placeholder="Stansiya axtar…" autocomplete="off" />
+        </div>
+        <div class="picker-list" id="stationList">
+          <p class="picker-status" id="pickerStatus">Yüklənir…</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── CONFIRM LOGOUT SHEET ── -->
+    <div
+      class="confirm-overlay"
+      id="logoutOverlay"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="logoutTitle"
+    >
+      <div class="confirm-sheet">
+        <div class="confirm-handle"></div>
+        <p class="confirm-title" id="logoutTitle">Çıxış etmək istəyirsiniz?</p>
+        <p class="confirm-body">Hesabınızdan çıxış ediləcək. Yenidən daxil olmaq üçün məlumatlarınızı daxil etməlisiniz.</p>
+        <div class="confirm-actions">
+          <button class="confirm-logout" id="confirmLogout" type="button">Bəli, çıxış et</button>
+          <button class="confirm-cancel" id="logoutCancel" type="button">Ləğv et</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── CONFIRM DELETE SHEET ── -->
+    <div
+      class="confirm-overlay"
+      id="confirmOverlay"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="confirmTitle"
+    >
+      <div class="confirm-sheet">
+        <div class="confirm-handle"></div>
+        <p class="confirm-title" id="confirmTitle">
+          Hesabı silmək istəyirsiniz?
+        </p>
+        <p class="confirm-body">
+          Bu əməliyyat geri qaytarıla bilməz. Bütün məlumatlarınız silinəcək.
+        </p>
+        <div class="confirm-actions">
+          <button class="confirm-del" id="confirmDel">Bəli, hesabı sil</button>
+          <button class="confirm-cancel" id="confirmCancel">Ləğv et</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="../lib/axios.min.js"></script>
+    <script src="../lib/api.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

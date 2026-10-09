@@ -1,0 +1,530 @@
+/* =========================================
+   SMART METRO – MƏXFİLİK SİYASƏTİ
+   Font: SF Pro (Apple system font)
+   Fully Responsive
+   ========================================= */
+
+/* ---------- RESET & BASE ---------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --blue-dark:     #0f2d6b;
+  --blue-main:     #2155a3;
+  --blue-mid:      #2566d4;
+  --blue-light:    #eef2fb;
+  --blue-lighter:  #f4f7fe;
+  --text-primary:  #1a2340;
+  --text-body:     #4a4f6a;
+  --text-muted:    #8b90a8;
+  --text-link:     #2566d4;
+  --bg-page:       #edf0f8;
+  --bg-card:       #ffffff;
+  --bg-header:     #ffffff;
+  --border-color:  #dde1f0;
+  --border-inner:  #f0f2fa;
+  --amber:         #f59e0b;
+  --amber-bg:      #fff8ec;
+  --amber-text:    #7a5c10;
+  --radius-card:   16px;
+  --radius-tag:    20px;
+  --radius-btn:    14px;
+  --shadow-card:   0 2px 10px rgba(30, 50, 120, 0.06);
+  --shadow-page:   0 24px 64px rgba(20, 40, 100, 0.16);
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont,
+               'SF Pro Text', 'SF Pro Display',
+               'Helvetica Neue', Arial, sans-serif;
+  background: var(--bg-page);
+  color: var(--text-primary);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 0 40px;
+}
+
+/* =========================================
+   PHONE SHELL (desktop view)
+   ========================================= */
+@media (min-width: 520px) {
+  body {
+    justify-content: flex-start;
+    padding: 40px 16px 60px;
+  }
+
+  .status-bar,
+  .app-header,
+  .hero,
+  .main-content {
+    width: 390px;
+  }
+
+  body > *:first-child {
+    border-radius: 36px 36px 0 0;
+    overflow: hidden;
+  }
+
+  .main-content {
+    border-radius: 0 0 36px 36px;
+    overflow: hidden;
+    padding-bottom: 32px;
+    box-shadow: var(--shadow-page);
+  }
+
+  .status-bar { border-radius: 36px 36px 0 0; }
+  .app-header { box-shadow: var(--shadow-page); }
+}
+
+/* =========================================
+   STATUS BAR
+   ========================================= */
+.status-bar {
+  background: var(--bg-header);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 22px 8px;
+  width: 100%;
+}
+
+.status-time {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  color: var(--text-primary);
+}
+
+.status-icons {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.icon-signal rect,
+.icon-battery rect,
+.icon-battery path {
+  fill: var(--text-primary);
+  stroke: var(--text-primary);
+}
+
+.icon-wifi circle,
+.icon-wifi path {
+  fill: var(--text-primary);
+  stroke: var(--text-primary);
+}
+
+/* =========================================
+   APP HEADER
+   ========================================= */
+.app-header {
+  background: var(--bg-header);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 18px 14px;
+  border-bottom: 0.5px solid var(--border-color);
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.back-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--blue-lighter);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.back-btn:hover  { background: #dde5f7; }
+.back-btn:active { transform: scale(0.93); }
+
+.back-btn svg path {
+  stroke: var(--blue-main);
+}
+
+.header-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.3px;
+  flex: 1;
+}
+
+.app-logo {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--blue-main);
+  font-style: italic;
+  letter-spacing: -1px;
+  margin-left: auto;
+}
+
+.theme-toggle {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--blue-lighter);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s ease, transform 0.1s ease;
+  margin-left: 8px;
+}
+
+.theme-toggle:hover  { background: #dde5f7; }
+.theme-toggle:active { transform: scale(0.93); }
+
+.theme-toggle svg {
+  stroke: var(--blue-main);
+  stroke-width: 1.5;
+  fill: none;
+}
+
+.theme-toggle .moon-icon {
+  display: none;
+}
+
+body.dark .theme-toggle .sun-icon {
+  display: none;
+}
+
+body.dark .theme-toggle .moon-icon {
+  display: block;
+}
+
+/* =========================================
+   HERO BANNER
+   ========================================= */
+.hero {
+  background: linear-gradient(140deg, #1a3a8f 0%, #2566d4 100%);
+  padding: 22px 22px 18px;
+  color: #fff;
+  width: 100%;
+}
+
+.hero-icon {
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.hero-title {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  margin-bottom: 6px;
+}
+
+.hero-sub {
+  font-size: 13px;
+  opacity: 0.82;
+  line-height: 1.55;
+  font-weight: 400;
+}
+
+.update-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-tag);
+  padding: 5px 14px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-top: 12px;
+  letter-spacing: 0.2px;
+}
+
+/* =========================================
+   MAIN CONTENT WRAPPER
+   ========================================= */
+.main-content {
+  width: 100%;
+  background: var(--bg-page);
+  padding-bottom: 16px;
+}
+
+/* =========================================
+   CARD
+   ========================================= */
+.card {
+  background: var(--bg-card);
+  margin: 14px 14px 0;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.card-header {
+  background: var(--blue-light);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--blue-mid);
+  flex-shrink: 0;
+}
+
+.card-title {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--blue-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.card-body {
+  padding: 15px 16px;
+}
+
+.card-body p {
+  font-size: 13.5px;
+  color: var(--text-body);
+  line-height: 1.7;
+}
+
+.card-body p + p {
+  margin-top: 10px;
+}
+
+/* =========================================
+   LIST
+   ========================================= */
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+}
+
+.list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 5px 0;
+  font-size: 13.5px;
+  color: var(--text-body);
+  line-height: 1.65;
+}
+
+.list li::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--blue-mid);
+  flex-shrink: 0;
+  margin-top: 7px;
+}
+
+/* =========================================
+   TAGS
+   ========================================= */
+.tag-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.tag {
+  background: var(--blue-light);
+  border-radius: var(--radius-tag);
+  padding: 5px 13px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--blue-main);
+  letter-spacing: 0.1px;
+}
+
+/* =========================================
+   HIGHLIGHT BOX
+   ========================================= */
+.highlight-box {
+  background: var(--amber-bg);
+  border-left: 3px solid var(--amber);
+  border-radius: 0 10px 10px 0;
+  padding: 11px 14px;
+  margin-top: 12px;
+}
+
+.highlight-box p {
+  font-size: 12.5px;
+  color: var(--amber-text);
+  line-height: 1.65;
+}
+
+/* =========================================
+   CONTACT CARD
+   ========================================= */
+.contact-card {
+  background: var(--bg-card);
+  margin: 14px 14px 0;
+  border-radius: var(--radius-card);
+  padding: 15px 16px;
+  box-shadow: var(--shadow-card);
+}
+
+.contact-card-title {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--blue-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-bottom: 10px;
+}
+
+.contact-row {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 9px 0;
+  border-bottom: 0.5px solid var(--border-inner);
+}
+
+.contact-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.contact-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--blue-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.contact-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+}
+
+.contact-value {
+  font-size: 13.5px;
+  color: var(--text-link);
+  font-weight: 600;
+}
+
+/* =========================================
+   ACCEPT BUTTON
+   ========================================= */
+.accept-btn {
+  display: block;
+  width: calc(100% - 28px);
+  margin: 18px 14px 0;
+  padding: 15px;
+  background: var(--blue-main);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.1px;
+  border: none;
+  border-radius: var(--radius-btn);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.accept-btn:hover  { background: #1a4490; }
+.accept-btn:active { transform: scale(0.98); }
+.accept-btn.accepted { background: #0a8a4a; }
+
+/* =========================================
+   RESPONSIVE BREAKPOINTS
+   ========================================= */
+
+/* Tablet */
+@media (min-width: 600px) and (max-width: 519px) {
+  .card,
+  .contact-card {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
+
+/* Wide screens – center as card */
+@media (min-width: 768px) {
+  body {
+    padding: 48px 24px 80px;
+  }
+
+  .status-bar,
+  .app-header,
+  .hero,
+  .main-content {
+    max-width: 420px;
+    width: 100%;
+  }
+}
+
+/* =========================================
+   DARK MODE
+   ========================================= */
+body.dark {
+  --blue-dark:    #a8c2f8;
+  --blue-main:    #6ea3f5;
+  --blue-mid:     #5b93f0;
+  --blue-light:   #1c2c4a;
+  --blue-lighter: #1a2540;
+  --text-primary: #e8eaf5;
+  --text-body:    #a8adc8;
+  --text-muted:   #5c6180;
+  --text-link:    #6ea3f5;
+  --bg-page:      #0f1526;
+  --bg-card:      #1a2035;
+  --bg-header:    #141929;
+  --border-color: #252d48;
+  --border-inner: #1e2840;
+  --amber-bg:     #2a2010;
+  --amber-text:   #d4a84b;
+  --shadow-card:  0 2px 12px rgba(0, 0, 0, 0.3);
+  --shadow-page:  0 24px 64px rgba(0, 0, 0, 0.5);
+}
+
+body.dark .hero {
+  background: linear-gradient(140deg, #0c1e4a 0%, #1040a0 100%);
+}
+
+body.dark .icon-signal rect,
+body.dark .icon-battery rect,
+body.dark .icon-battery path,
+body.dark .icon-wifi circle,
+body.dark .icon-wifi path {
+  fill: var(--text-primary);
+  stroke: var(--text-primary);
+}

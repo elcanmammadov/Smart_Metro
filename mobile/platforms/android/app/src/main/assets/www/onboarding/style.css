@@ -1,0 +1,180 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(160deg, #f0eeff 0%, #fafaff 100%);
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+    "Segoe UI", sans-serif;
+}
+
+.screen {
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(8px, 1.5dvh, 14px) clamp(20px, 6vw, 32px)
+    clamp(8px, 1.5dvh, 14px);
+  overflow: hidden;
+}
+
+@media (min-width: 480px) {
+  .screen {
+    width: 390px;
+    height: 730px;
+    box-shadow: 0 8px 48px rgba(80, 60, 180, 0.13);
+  }
+}
+
+.main-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1b2a4a;
+  text-align: center;
+  line-height: 1.35;
+  margin-bottom: clamp(6px, 1dvh, 10px);
+  margin-top: 30px;
+}
+
+.feature-list {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(10px, 1.8dvh, 14px);
+  justify-content: flex-start; /* ← yuxarıdan başlasın */
+  padding: 20px 0;
+  margin-top: 20px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 3vw, 18px);
+  border-radius: 18px;
+  padding: clamp(12px, 2dvh, 16px) clamp(14px, 4vw, 20px);
+  padding-right: clamp(20px, 6vw, 40px);
+  margin-left: -10px;             /* ← sola çək */
+}
+
+.feature-item img {
+  height: 80px;
+}
+
+.feature-icon {
+  width: clamp(46px, 12vw, 56px);
+  height: clamp(46px, 12vw, 56px);
+  border-radius: 14px;
+  background: #fff;
+  border: 1.5px solid #e8e2ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.feature-icon img {
+  width: clamp(22px, 6vw, 28px);
+  height: clamp(22px, 6vw, 28px);
+  object-fit: contain;
+}
+
+.feature-icon svg {
+  width: clamp(22px, 6vw, 28px);
+  height: clamp(22px, 6vw, 28px);
+}
+
+.feature-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.feature-title {
+  font-family:
+    "SF Pro",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #1b2a4a;
+  line-height: normal;
+  letter-spacing: 0px;
+  white-space: nowrap; /* ← 1 sətirdə qalsın */
+  margin-bottom: 6px; /* ← title/desc arası boşluq */
+}
+
+.feature-desc {
+  font-family:
+    "SF Pro",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #8a82a8;
+  line-height: 22px;
+  letter-spacing: 0px;
+}
+
+.bottom-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(8px, 1.2dvh, 14px);
+  margin-top: clamp(60px, 12dvh, 120px);  /* ← xeyli boşluq */
+}
+
+.dots {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.dot {
+  width: 10px;                    /* Figma: Ellipse W:10 */
+  height: 10px;
+  border-radius: 50%;
+  background: #8a82a8;            /* Boz */
+  transition: all 0.3s ease;
+}
+
+.dot.active {
+  width: 38px;                    /* Figma: W:38 */
+  height: 10px;                   /* Figma: H:10 */
+  border-radius: 6px;             /* Figma: Corner radius: 6 */
+  background: rgb(126, 68, 144);  /* Figma: Logo reng */
+  overflow: hidden;               /* Clip content: ✓ */
+}
+
+.btn-start {
+  width: 100%;
+  padding: clamp(14px, 2dvh, 18px);
+  background: #1b2a4a;
+  color: #fff;
+  border: none;
+  border-radius: 16px;
+  font-size: clamp(15px, 4vw, 17px);
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    opacity 0.15s ease;
+  box-shadow: 0 4px 20px rgba(27, 42, 74, 0.3);
+}
+
+.btn-start:hover {
+  opacity: 0.88;
+}
+.btn-start:active {
+  transform: scale(0.97);
+}

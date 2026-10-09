@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/avazalijamal/Desktop/HackathonMetro/**)",
+      "Read(//Users/avazalijamal/Downloads/**)"
+    ],
+    "additionalDirectories": [
+      "/Users/avazalijamal/Downloads"
+    ]
+  }
+}

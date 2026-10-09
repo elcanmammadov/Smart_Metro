@@ -1,0 +1,444 @@
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  min-height: 100dvh;
+  background: #f4f5fb;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+    "Helvetica Neue", "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================================
+   SCREEN WRAPPER
+   ============================================================ */
+.screen {
+  width: 100%;
+  max-width: 430px;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  padding: 0 24px env(safe-area-inset-bottom, 24px);
+  overflow: hidden;
+  animation: screenIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes screenIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Desktop card effect */
+@media (min-width: 480px) {
+  body {
+    align-items: center;
+    background: #eceeff;
+  }
+  .screen {
+    min-height: auto;
+    height: auto;
+    box-shadow: 0 16px 56px rgba(26, 71, 201, 0.14);
+    padding-bottom: 36px;
+  }
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.header {
+  text-align: center;
+  padding-top: clamp(48px, 9dvh, 72px);
+  margin-bottom: clamp(28px, 4dvh, 40px);
+}
+
+.header h1 {
+  font-size: clamp(24px, 6.5vw, 30px);
+  font-weight: 700;
+  color: #414345;
+  letter-spacing: -0.5px;
+  line-height: 1.15;
+  margin-bottom: 10px;
+}
+
+.header p {
+  font-size: clamp(13px, 3.6vw, 15px);
+  color: #8e93aa;
+  line-height: 1.55;
+  font-weight: 400;
+}
+
+/* ============================================================
+   FORM AREA
+   ============================================================ */
+.form-area {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+/* ── Input wrap ── */
+.input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: clamp(52px, 7.5dvh, 58px);
+  border: 1.6px solid #e2e6f3;
+  border-radius: 14px;
+  padding: 0 14px;
+  background: #fafbff;
+  gap: 10px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.input-wrap:focus-within {
+  border-color: #1947c8;
+  background: #ffffff;
+  box-shadow: 0 0 0 3.5px rgba(25, 71, 200, 0.1);
+}
+
+.input-wrap.has-error {
+  border-color: #e53535;
+  box-shadow: 0 0 0 3.5px rgba(229, 53, 53, 0.09);
+}
+
+.input-icon {
+  width: 19px;
+  height: 19px;
+  flex-shrink: 0;
+  color: #b0b6cc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  transition: color 0.2s;
+}
+
+.input-wrap:focus-within .input-icon {
+  color: #1947c8;
+}
+
+.input-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.input-wrap input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: clamp(14px, 4vw, 16px);
+  color: #1a1e35;
+  font-weight: 400;
+  min-width: 0;
+}
+
+.input-wrap input::placeholder {
+  color: #b8bdd4;
+}
+
+/* Eye / clear button inside input */
+.input-eye {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: #b0b6cc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.18s;
+}
+
+.input-eye:hover {
+  color: #1947c8;
+}
+
+.input-eye svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ── Custom checkbox ── */
+.checkbox-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+  margin-top: 2px;
+}
+
+.checkbox-box {
+  position: relative;
+  flex-shrink: 0;
+  width: 19px;
+  height: 19px;
+  margin-top: 1px;
+}
+
+.checkbox-box input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.checkbox-custom {
+  position: absolute;
+  inset: 0;
+  border: 1.8px solid #d0d5e8;
+  border-radius: 5px;
+  background: #fafbff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background 0.18s,
+    border-color 0.18s;
+  pointer-events: none;
+}
+
+.checkbox-custom svg {
+  width: 10px;
+  height: 8px;
+  opacity: 0;
+  transform: scale(0.6);
+  transition:
+    opacity 0.15s,
+    transform 0.15s;
+}
+
+.checkbox-box input[type="checkbox"]:checked ~ .checkbox-custom {
+  background: #1947c8;
+  border-color: #1947c8;
+}
+
+.checkbox-box input[type="checkbox"]:checked ~ .checkbox-custom svg {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.checkbox-text {
+  font-size: clamp(12px, 3.4vw, 13.5px);
+  color: #7d839e;
+  line-height: 1.5;
+}
+
+.checkbox-text a {
+  color: #1947c8;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.checkbox-text a:hover {
+  text-decoration: underline;
+}
+
+/* ── Primary button ── */
+.btn-primary {
+  width: 100%;
+  height: clamp(52px, 7.5dvh, 58px);
+  background: #1a2e72;
+  color: #ffffff;
+  border: none;
+  border-radius: 14px;
+  font-family: inherit;
+  font-size: clamp(15px, 4.2vw, 17px);
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition:
+    background 0.18s,
+    transform 0.13s,
+    box-shadow 0.18s;
+  box-shadow: 0 5px 20px rgba(26, 46, 114, 0.32);
+  margin-top: 4px;
+}
+
+.btn-primary:hover {
+  background: #152460;
+  box-shadow: 0 7px 26px rgba(26, 46, 114, 0.4);
+}
+
+.btn-primary:active {
+  transform: scale(0.975);
+}
+
+.btn-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Loader inside button */
+.btn-loader {
+  display: none;
+  width: 21px;
+  height: 21px;
+  border: 2.5px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.65s linear infinite;
+}
+
+.btn-primary.loading .btn-text {
+  display: none;
+}
+.btn-primary.loading .btn-loader {
+  display: block;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Divider ── */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 4px 0;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #ebebf4;
+}
+
+.divider span {
+  font-size: 12.5px;
+  color: #b8bdd4;
+  white-space: nowrap;
+}
+
+/* ── Social buttons ── */
+.btn-social {
+  width: 100%;
+  height: clamp(50px, 7dvh, 56px);
+  background: #ffffff;
+  color: #1a1e35;
+  border: 1.6px solid #e2e6f3;
+  border-radius: 14px;
+  font-family: inherit;
+  font-size: clamp(14px, 3.8vw, 15.5px);
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition:
+    background 0.16s ease,
+    border-color 0.16s ease,
+    transform 0.13s;
+}
+
+.btn-social:hover {
+  background: #f5f6ff;
+  border-color: #c8cde6;
+}
+
+.btn-social:active {
+  transform: scale(0.975);
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+  text-align: center;
+  padding: clamp(20px, 3.5dvh, 30px) 0 clamp(16px, 2dvh, 24px);
+}
+
+.footer p {
+  font-size: clamp(13px, 3.5vw, 14.5px);
+  color: #9096b0;
+}
+
+.footer a {
+  color: #22c55e;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+.toast {
+  position: fixed;
+  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  left: 50%;
+  transform: translateX(-50%) translateY(60px);
+  background: #1a1e35;
+  color: #ffffff;
+  padding: 13px 24px;
+  border-radius: 50px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 9999;
+  transition:
+    opacity 0.28s ease,
+    transform 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}

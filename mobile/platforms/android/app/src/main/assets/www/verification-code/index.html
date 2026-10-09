@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="az">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
+    <title>Smart Metro – Təsdiqlənmə kodu</title>
+
+    <script>
+      (function () {
+        var s = null;
+        try {
+          s = localStorage.getItem("metro-otp-theme");
+        } catch (e) {}
+        var d =
+          s === "dark"
+            ? true
+            : s === "light"
+              ? false
+              : (function () {
+                  try {
+                    return window.matchMedia("(prefers-color-scheme:dark)")
+                      .matches;
+                  } catch (e) {
+                    return false;
+                  }
+                })();
+        if (d) document.documentElement.setAttribute("data-dark", "");
+      })();
+    </script>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <!-- ── TOP BAR ── -->
+      <header class="topbar">
+        <button class="icon-btn" id="backBtn" aria-label="Geri">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
+        </button>
+        <button class="icon-btn" id="themeBtn" aria-label="Qaranlıq moda keç">
+          <svg
+            id="themeIcon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+        </button>
+      </header>
+
+      <!-- ── FORM VIEW ── -->
+      <main class="content" id="formView">
+        <h1 class="heading">Təsdiqlənmə kodu</h1>
+        <p class="subheading">
+          Telefon nömrənizə göndərilən<br />4 rəqəmli kodu daxil edin.
+        </p>
+
+        <!-- OTP boxes -->
+        <div
+          class="otp-row"
+          id="otpRow"
+          role="group"
+          aria-label="4 rəqəmli kod"
+        >
+          <div
+            class="otp-box empty"
+            data-idx="0"
+            role="textbox"
+            aria-label="Birinci rəqəm"
+            tabindex="0"
+          ></div>
+          <div
+            class="otp-box empty"
+            data-idx="1"
+            role="textbox"
+            aria-label="İkinci rəqəm"
+            tabindex="0"
+          ></div>
+          <div
+            class="otp-box empty"
+            data-idx="2"
+            role="textbox"
+            aria-label="Üçüncü rəqəm"
+            tabindex="0"
+          ></div>
+          <div
+            class="otp-box empty"
+            data-idx="3"
+            role="textbox"
+            aria-label="Dördüncü rəqəm"
+            tabindex="0"
+          ></div>
+        </div>
+
+        <!-- Hidden real input for capturing keyboard -->
+        <input
+          class="otp-hidden-input"
+          id="otpInput"
+          type="tel"
+          inputmode="numeric"
+          pattern="[0-9]*"
+          maxlength="4"
+          autocomplete="one-time-code"
+          aria-hidden="true"
+          tabindex="-1"
+        />
+
+        <!-- Error message -->
+        <p class="otp-error" id="otpError" role="alert"></p>
+
+        <!-- Timer + resend -->
+        <div class="timer-row">
+          <p class="timer-text">
+            <span class="timer-val" id="timerVal">00:30</span>
+            <span id="timerSuffix"> sonra yenidən göndər</span>
+          </p>
+          <button class="resend-link" id="resendBtn" type="button">
+            kodu yenidən göndər
+          </button>
+        </div>
+
+        <div class="flex-space"></div>
+
+        <!-- Submit -->
+        <button class="submit-btn" id="submitBtn" type="button" disabled>
+          <span class="btn-text">Kodu göndər</span>
+          <span class="btn-spinner" aria-hidden="true"></span>
+        </button>
+      </main>
+
+      <!-- ── SUCCESS VIEW (hidden) ── -->
+      <div class="success-view" id="successView" aria-live="polite">
+        <div class="success-ring">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+        </div>
+        <p class="success-title">Uğurla təsdiqləndi!</p>
+        <p class="success-sub">
+          Telefon nömrəniz uğurla<br />təsdiqləndi. Yeni şifrənizi<br />təyin
+          edə bilərsiniz.
+        </p>
+        <div class="flex-space"></div>
+        <button class="success-btn" id="continueBtn" type="button">
+          Davam et
+        </button>
+      </div>
+    </div>
+
+    <script src="../lib/axios.min.js"></script>
+    <script src="../lib/api.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
