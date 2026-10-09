@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: smart-metro
+    runtime: static
+    buildCommand: echo "No build step"
+    staticPublishPath: ./mobile/www
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: no-cache
